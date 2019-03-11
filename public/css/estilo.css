@@ -1,0 +1,7 @@
+.red-gradient {
+	background: linear-gradient(to right bottom,#e81e1e, #ff6060)
+}
+.font-home {
+	font-family: 'impact';
+	color: white;
+}
