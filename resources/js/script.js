@@ -6,9 +6,8 @@ window.swal = require('sweetalert')
 window.Vue = require('vue');
 
 $(document).ready(function() {
+    alertify.defaults.maintainFocus = false;
     $('#table').DataTable({
-        "paging": false,
-        'scrollY': '400px',
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json",
             "decimal": ","
@@ -23,13 +22,13 @@ $(document).ready(function() {
         ]
     })
 });
-$('#table_wrapper').ready(function() {
-    setTimeout(function() {
-        let firstDiv = $('#table_wrapper').find('.row').first().find('div').first();
-        $(firstDiv).addClass('d-flex justify-items-center align-items-center')
-        $(firstDiv).append('Ultima nota: 12/04/2019 Nº 56');
-    }, 1000);
-});
+// $('#table_wrapper').ready(function() {
+//     setTimeout(function() {
+//         let firstDiv = $('#table_wrapper').find('.row').first().find('div').first();
+//         $(firstDiv).addClass('d-flex justify-items-center align-items-center')
+//         $(firstDiv).append('Ultima nota: 12/04/2019 Nº 56');
+//     }, 1000);
+// });
 
 const app = new Vue({
     el: '#app',
@@ -78,12 +77,11 @@ const app = new Vue({
 });
 
 
-
 $(document).on('click','td[enable-copy*=true]', function() {
     $(this).CopyToClipboard()
     let name = $(this).attr('name')
-    $('tr').removeClass('red-bari');
-    $(this).parents('tr').addClass('red-bari')
+    $('tr').removeClass('bg-red-bariloche');
+    $(this).parents('tr').addClass('bg-red-bariloche')
     let nota = $(this).parents('tr').find('.nota').text()
     alertify.message(`${name} da nota <b>${nota}</b> copiada para área de transferência!`)
 });

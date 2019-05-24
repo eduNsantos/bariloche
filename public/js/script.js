@@ -64434,9 +64434,8 @@ __webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/j
 window.swal = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 $(document).ready(function () {
+  alertify.defaults.maintainFocus = false;
   $('#table').DataTable({
-    "paging": false,
-    'scrollY': '400px',
     "language": {
       "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json",
       "decimal": ","
@@ -64445,14 +64444,14 @@ $(document).ready(function () {
       type: "date-eu"
     }, null, null, null]
   });
-});
-$('#table_wrapper').ready(function () {
-  setTimeout(function () {
-    var firstDiv = $('#table_wrapper').find('.row').first().find('div').first();
-    $(firstDiv).addClass('d-flex justify-items-center align-items-center');
-    $(firstDiv).append('Ultima nota: 12/04/2019 Nº 56');
-  }, 1000);
-});
+}); // $('#table_wrapper').ready(function() {
+//     setTimeout(function() {
+//         let firstDiv = $('#table_wrapper').find('.row').first().find('div').first();
+//         $(firstDiv).addClass('d-flex justify-items-center align-items-center')
+//         $(firstDiv).append('Ultima nota: 12/04/2019 Nº 56');
+//     }, 1000);
+// });
+
 var app = new Vue({
   el: '#app',
   methods: {
@@ -64498,22 +64497,34 @@ var app = new Vue({
 $(document).on('click', 'td[enable-copy*=true]', function () {
   $(this).CopyToClipboard();
   var name = $(this).attr('name');
-  $('tr').removeClass('red-bari');
-  $(this).parents('tr').addClass('red-bari');
+  $('tr').removeClass('bg-red-bariloche');
+  $(this).parents('tr').addClass('bg-red-bariloche');
   var nota = $(this).parents('tr').find('.nota').text();
   alertify.message("".concat(name, " da nota <b>").concat(nota, "</b> copiada para \xE1rea de transfer\xEAncia!"));
 });
 
 /***/ }),
 
+/***/ "./resources/sass/app.scss":
+/*!*********************************!*\
+  !*** ./resources/sass/app.scss ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!**************************************!*\
-  !*** multi ./resources/js/script.js ***!
-  \**************************************/
+/*!****************************************************************!*\
+  !*** multi ./resources/js/script.js ./resources/sass/app.scss ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Program Files\VertrigoServ\www\bariloche\resources\js\script.js */"./resources/js/script.js");
+__webpack_require__(/*! C:\Program Files\VertrigoServ\www\bariloche\resources\js\script.js */"./resources/js/script.js");
+module.exports = __webpack_require__(/*! C:\Program Files\VertrigoServ\www\bariloche\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class FoldersController extends Controller
 {
-    const rootFolder = 'C:\GBS-EGIS\Exe\Downloads\\';
+    const ROOT_FOLDER = 'C:\GBS-EGIS\Exe\Downloads\\';
+
     private $monthFolders;
     private $notCreatedFolders = array();
     private $status;
@@ -31,11 +32,16 @@ class FoldersController extends Controller
         ]);
     }
 
-    public static function searchAllFiles()
+    /**
+     * searchAllFiles
+     *
+     * @return array
+     */
+    public static function searchAllFiles(): array
     {
-        $files = scandir(self::rootFolder);
+        $files = scandir(self::ROOT_FOLDER);
         $allFiles = [];
-        $folders = [self::rootFolder];
+        $folders = [self::ROOT_FOLDER];
         $folderCounter = 1;
         for ($i = 0; $i < $folderCounter; $i++) {
             $files = scandir($folders[$i]);
@@ -57,6 +63,19 @@ class FoldersController extends Controller
 
         return $allFiles;
     }
+
+    public static function searchFilesInRootFolder(): array
+    {
+        $allFiles = [];
+        foreach ($files as $file) {
+            $filePath = self::ROOT_FOLDER . '\\' . $file;
+            if (filetype($file) == "file") {
+                $allFiles[$file] = $filePath;
+            }
+        }
+
+        return $allFiles;
+    }
     
     /**
      * Cria todas as pastas de meses e quinzenas
@@ -66,7 +85,7 @@ class FoldersController extends Controller
     public function createAllFolders()
     {
         foreach ($this->monthFolders as $pasta) {
-            $pastaAtual = self::rootFolder.'\\'.$pasta;
+            $pastaAtual = self::ROOT_FOLDER.'\\'.$pasta;
             $this->createFolder($pastaAtual, $pasta);
 
             $mes = substr($pasta, 0, 2);

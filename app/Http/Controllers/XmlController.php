@@ -12,7 +12,7 @@ class XmlController extends Controller
 
     public function index()
     {
-		$folders = FoldersController::searchAllFiles();
+		$folders = FoldersController::searchFilesInRootFolder();
 
 		foreach ($folders as $folder) {
 			$item = new Xml($folder);
