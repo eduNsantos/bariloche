@@ -1,24 +1,34 @@
 @extends('templates.user')
 
-@section('links')
-	@parent
-	<script type="text/javascript" src="js/script.js"></script>
-@endsection
 @section('body')
-	<form class="mx-auto col-8 shadow border p-5 my-4" action="{{ route('procurar_xml_caminho') }}" method="POST">
-		@csrf
-		<div class="form-row">
-			<div class="form-group mx-auto">
-				<label>Copie o caminho do mapeamento nota fiscal e cole aqui</label>		
-				<input class="form-control" type="text" name="caminho" required>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="form-group mx-auto">
-				<input type="submit" class="btn btn-outline-primary" value="Procurar notas">
-			</div>
-		</div>
-	</form>
+	<div class="col-12 mx-auto">
+		<table id="table" class="table">
+			<thead>
+				<tr>	
+					<th>Nota</th>
+					<th>Chave</th>
+					<th>Emissão</th>
+					<th>Valor total (Reais)</th>
+					<th>Fornecedor</th>
+					<th>Finalidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				@forelse ($xmls as $xml)
+					<tr>
+						<td enable-copy="true" name="Número" class="nota">{{ $xml->getNumero() }}</td>
+						<td enable-copy="true" name="Chave">{{ $xml->getChave() }}</td>
+						<td enable-copy="true" name="Data de emissão">{{ $xml->getEmissao() }}</td>
+						<td enable-copy="true" name="Valor do total">{{ $xml->getTotal() }}</td>
+						<td enable-copy="true" name="Fornecedor">{{ $xml->getFornecedor() }}</td>
+						<td enable-copy="true" name="Finalidade">{{ $xml->getFinalidade() }}</td>
+					</tr>
+				@empty
+					<tr>
+						<td colspan="6" class="text-center bg-light"> Nenhum arquivo encontrado </td>
+					</tr>
+				@endforelse
+			</tbody>
+		</table>
+	</div>
 @endsection
-</body>
-</html>

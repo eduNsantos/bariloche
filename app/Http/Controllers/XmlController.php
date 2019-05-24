@@ -2,32 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Xml;
 use Illuminate\Http\Request;
+use App\Http\Controllers\FoldersController;
 
 class XmlController extends Controller
-{
+{	
+	private $xmls;
 
     public function index()
     {
-    	return view('index');
+		$folders = FoldersController::searchAllFiles();
+
+		foreach ($folders as $folder) {
+			$item = new Xml($folder);
+			$this->setXmls($item);
+		}
+		
+    	return view('index', [
+			'xmls' => $this->xmls
+		]);
     }
 
-    public function show(Request $request)
-    {
-    	if (!empty($request->caminho)) {
-			$caminho = $request->caminho;
-			if (!file_exists($request->caminho)) {
-				$arquivos = false;
-			} else {
-				$arquivos = scandir($request->caminho);
-			}
-    	} else {
-    		$arquivos = false;
-    	}
-    	return view('AcharXmls', [
-    		'arquivos' => $arquivos,
-    		'caminho' => $caminho
-    	]);
-    }
 
+	/**
+	 * Get the value of xmls
+	 */ 
+	public function getXmls()
+	{
+		return $this->xmls;
+	}
+
+	/**
+	 * Set the value of xmls
+	 *
+	 * @return  self
+	 */ 
+	public function setXmls($xml)
+	{
+		$this->xmls[] = $xml;
+	}
 }
