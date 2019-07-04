@@ -2,26 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Xml;
 use Illuminate\Http\Request;
-use App\Http\Controllers\FoldersController;
+use App\Classes\Xml;
 
 class XmlController extends Controller
 {	
-	private $xmls;
-
     public function index()
     {
-		$folders = FoldersController::searchFilesInRootFolder();
+        $xmls = Xml::all();   
 
-		foreach ($folders as $folder) {
-			$item = new Xml($folder);
-			$this->setXmls($item);
-		}
-		
-    	return view('index', [
-			'xmls' => $this->xmls
-		]);
+        return view('xml/list', compact('xmls'));
     }
 
 

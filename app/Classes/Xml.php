@@ -2,7 +2,10 @@
 
 namespace App\Classes;
 
-class Xml {
+use App\Classes\Folder;
+
+class Xml
+{
     private $xml;
     private $numero;
     private $chave;
@@ -262,5 +265,16 @@ class Xml {
         $this->finalidade = $finalidade;
 
         return $this;
+    }
+    
+    public static function all(Array $item = array()): array
+    {
+        $folders = Folder::searchFilesInRootFolder();
+        
+        foreach ($folders as $folder) {
+            $item[] = new Xml($folder);
+        }
+
+        return $item;
     }
 }

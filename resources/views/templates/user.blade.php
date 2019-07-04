@@ -18,21 +18,18 @@
 </head>
 <body>
 	<div id="app">
-		<nav class="navbar navbar-expand-lg navbar-white bg-white" style="box-shadow: 5px 0 6px #cecece">
-			<a class="navbar-brand" href=""><img style="max-width: 150px" src="{{ asset('storage/logo_bariloche_276x87px.jpg') }}"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				<div class="navbar-nav ml-auto text-right">
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('xml') }}">Procurar XML's</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link btn btn-outline-primary" id="criar-pastas" href="#" route="{{ route('criar_pastas') }}" @click="createFolders()">Criar pastas</a>
-					</li>
-				</div>
-			</div>
+		<nav class="navbar navbar-light navbar-expand-lg shadow" style="background-color: #F6EDD6">
+			<a class="navbar-brand" href="#"  style="font-size: 16pt">
+				<img src="{{ asset('storage/logo-artegel-peq.png') }}" alt="" width="200px">
+			</a>
+			<ul class="navbar-nav ml-auto" style="font-size: 12pt;text-transform: uppercase">
+				<li class="nav-item">
+					<a class="nav-link" href="{{ route('search_xml') }}">Procurar XML's</a>
+				</li>
+				{{-- <li class="nav-item">
+					<a class="nav-link" id="criar-pastas" href="#" route="{{ route('create_folder') }}" @click="createFolders()">Criar pastas</a>
+				</li> --}}
+			</ul>
 		</nav>
 		<div class="container-fluid mt-2 p-2">
 			@section('body')

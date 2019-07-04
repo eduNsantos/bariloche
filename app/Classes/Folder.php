@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Classes;
 
 use Illuminate\Http\Request;
 
-class FoldersController extends Controller
+class Folder
 {
     const ROOT_FOLDER = 'C:\GBS-EGIS\Exe\Downloads\\';
 
@@ -33,11 +33,11 @@ class FoldersController extends Controller
     }
 
     /**
-     * searchAllFiles
+     * searchFilesInRootFolder
      *
      * @return array
      */
-    public static function searchAllFiles(): array
+    public static function searchFilesInRootFolder(): array
     {
         $files = scandir(self::ROOT_FOLDER);
         $allFiles = [];
@@ -58,19 +58,6 @@ class FoldersController extends Controller
                         $allFiles[$file] = $filePath;
                     }
                 }
-            }
-        }
-
-        return $allFiles;
-    }
-
-    public static function searchFilesInRootFolder(): array
-    {
-        $allFiles = [];
-        foreach ($files as $file) {
-            $filePath = self::ROOT_FOLDER . '\\' . $file;
-            if (filetype($file) == "file") {
-                $allFiles[$file] = $filePath;
             }
         }
 
@@ -112,7 +99,7 @@ class FoldersController extends Controller
      *
      * @return bool
      */
-    private function createFolder($pastaAtual, $pasta) : bool
+    private function createFolder($pastaAtual, $pasta): bool
     {
         if (file_exists($pastaAtual)) {
             $this->setNotCreatedFolders($pasta);

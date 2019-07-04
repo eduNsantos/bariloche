@@ -5,6 +5,8 @@ require('datatables.net-dt');
 window.swal = require('sweetalert')
 window.Vue = require('vue');
 
+Vue.component('vc-list', require('./components/List.vue').default);
+
 $(document).ready(function() {
     alertify.defaults.maintainFocus = false;
     $('#table').DataTable({
@@ -22,13 +24,6 @@ $(document).ready(function() {
         ]
     })
 });
-// $('#table_wrapper').ready(function() {
-//     setTimeout(function() {
-//         let firstDiv = $('#table_wrapper').find('.row').first().find('div').first();
-//         $(firstDiv).addClass('d-flex justify-items-center align-items-center')
-//         $(firstDiv).append('Ultima nota: 12/04/2019 Nº 56');
-//     }, 1000);
-// });
 
 const app = new Vue({
     el: '#app',
